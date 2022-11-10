@@ -1,8 +1,9 @@
 import React from "react"
 
 export default function Front() {
-    return (
-        <div>
-        </div>
-    )
+  return (
+    <div>
+      <p>hi</p>
+    </div>
+  )
 }
