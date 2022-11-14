@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: to IE server
+  description: Sends an order from frontend to the server
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://IEserver.com
+paths:
+  /sendOrder:
+    post:
+      summary: Creates an order in IEs server
+      requestBody:
+        content:
+          application/json: 
+            schema:   
+              type: object
+              properties:
+                orderId:
+                  type: integer
+                  example: 123
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      itemId:
+                        type: integer
+                        example: 2
+                      itemPrice:
+                        type: number
+                        example: 29.99
+                      count:
+                        type: integer
+                        example: 2
+                addressDetails:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                      example: "Streetname 123"
+                    city:
+                      type: string
+                      example: "Odense"
+                    country:
+                      type: string
+                      example: "DK"
+                    ZIP:
+                      type: integer
+                      example: "5000"
+                person:
+                  type: object
+                  properties:
+                    name: 
+                      type: string
+                      example: "Firstname Lastname"
+                    phone:
+                      type: string
+                      example: "12 34 56 78"
+                    email:
+                      type: string
+                      example: "example@email.com"
+                note:
+                  type: string
+                  example: "Hide the item under my doormat if I am not home"
+                coupon:
+                  type: object
+                  properties:
+                    ID: 
+                      type: integer
+                      example: 3
+                    name:
+                      type: string
+                      example: "two for one"
+                    description:
+                      type: string
+                      example: "Buy two post (ID: 2) and get one for free"
+                    freeShipping:
+                      type: boolean
+                      example: false
+                    reduction:
+                      type: number
+                      example: 29.99
+                    
+                    
+      responses:
+        '201':
+          description: Deal created
+        '400':
+          description: Not accepted
