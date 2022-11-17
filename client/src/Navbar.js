@@ -9,7 +9,7 @@ export default function Navbar() {
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
             />
-            <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+            <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 shadow-sm">
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
                     <a href="#" className="flex items-center">
                         <img src={logo} className="mr-3 h-6 sm:h-9" alt="IE Logo"></img>
