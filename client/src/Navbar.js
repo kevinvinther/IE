@@ -58,9 +58,14 @@ export default function Navbar() {
                             </li>
                         </ul>
                     </div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">shopping_basket</span>
-                    </a>
+                    <button href="#">
+                        <span className="material-symbols-outlined relative">
+                            shopping_basket
+                        </span>
+                        <div className="rounded-full bg-red-500 p-1 text-white text-xs flex justify-center align-middle w-6 h-6 absolute translate-x-[35%] translate-y-[-55%]">
+                            3
+                        </div>
+                    </button>
                 </div>
             </nav>
         </div>
