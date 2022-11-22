@@ -1,11 +1,25 @@
+import json
+
 class Order(object):
 
     allOrders = []
 
     def __init__(self, data):
-        self.id = data["ID"]]
         self.data = data
         self.open = True
+        message = None
+        if isinstance(data, str):
+            message = json.loads(data)
+        else:
+            message = data
+        
+        self.id = message["orderId"]
+        self.items = message["items"]
+        self.custAddress = message["addressDetails"]
+        self.cust = message["person"]
+        self.note = message["note"]
+        self.coupon = message["coupon"]
+
 
         allOrders.add(self)
 
