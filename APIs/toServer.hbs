@@ -2,9 +2,8 @@ openapi: 3.0.0
 info:
   version: 1.0.0
   title: to IE server
-  description: Sends an order from frontend to the server
 servers:
-  - description: SwaggerHub API Auto Mocking
+  - description: Communication to the server
     url: https://IEserver.com
 paths:
   /sendOrder:
@@ -81,10 +80,80 @@ paths:
                     reduction:
                       type: number
                       example: 29.99
-                    
-                    
       responses:
         '201':
           description: Deal created
         '400':
           description: Not accepted
+  /item:
+    get:
+      summary: Returns a list of all the items
+      responses:
+        '200':
+          description: A list of all the items
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    itemId:
+                      type: integer
+                      example: 2
+                    itemPrice: 
+                      type: number
+                      example: 29.99
+                    stockCount:
+                      type: integer
+                      example: 7
+                    name:
+                      type: string
+                      example: "Pan"
+                    description:
+                      type: string
+                      example: "A pan for cooking food"
+                    image:
+                      type: string
+                      format: binary
+  /item/{itemId}:
+    get:
+      summary: Returns a list of all the items
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: ID of the item in question
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+            example: 2
+      responses:
+        '200':
+          description: A list of all the items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  itemId:
+                    type: integer
+                    example: 2
+                  itemPrice: 
+                    type: number
+                    example: 29.99
+                  stockCount:
+                    type: integer
+                    example: 7
+                  name:
+                    type: string
+                    example: "Pan"
+                  description:
+                    type: string
+                    example: "A pan for cooking food"
+                  image:
+                    type: string
+                    format: binary
+        '404':
+          description: Item not found
