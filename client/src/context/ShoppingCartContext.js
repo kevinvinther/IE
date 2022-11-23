@@ -66,8 +66,10 @@ export function ShoppingCartProvider({ children }) {
                 closeCart,
             }}
         >
-            {children}
-            <ShoppingCart isOpen={isOpen} />
+            <div className="h-screen bg-gray-50">
+                {children}
+                <ShoppingCart isOpen={isOpen} />
+            </div>
         </ShoppingCartContext.Provider>
     )
 }
