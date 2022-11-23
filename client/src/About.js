@@ -2,9 +2,9 @@ import React from "react"
 
 export default function About() {
     return (
-        <div className="max-w-[40%] min-w-[10%] m-auto leading-7">
+        <div className="max-w-[37%] min-w-[10%] m-auto leading-7 container mt-10">
             <h1 className="text-4xl font-bold mb-2 pb-2">About Us</h1>
-            <p>
+            <p className="text-lg text-gray-800 mt-4">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
                 ullamcorper leo. Mauris diam risus, faucibus eu fringilla sed, aliquam
                 eget risus. Donec blandit, purus quis ornare accumsan, nisl sem faucibus
@@ -21,7 +21,7 @@ export default function About() {
                 tincidunt bibendum orci. Phasellus ac elit elementum, euismod felis in,
                 consequat est.{" "}
             </p>
-            <p>
+            <p className="text-lg text-gray-800 mt-4">
                 {" "}
                 Praesent tellus metus, interdum quis arcu sed, consequat rutrum dolor.
                 Suspendisse eu felis vel augue lacinia pretium ut vitae nisl. Sed
@@ -36,7 +36,7 @@ export default function About() {
                 nulla, sagittis vitae pulvinar vel, rutrum vel odio. Sed in dignissim
                 odio, at imperdiet nulla.
             </p>
-            <p>
+            <p className="text-lg text-gray-800 mt-4">
                 hasellus commodo hendrerit accumsan. Donec euismod vel ex ac pharetra.
                 Donec a arcu tincidunt, blandit arcu efficitur, dignissim enim.
                 Suspendisse id suscipit ex, vitae sodales velit. Cras iaculis justo eget
@@ -50,7 +50,7 @@ export default function About() {
                 aliquet urna ac tortor rhoncus consectetur. Pellentesque a tortor vel
                 enim maximus auctor ac eu erat. Praesent ultricies viverra aliquet.{" "}
             </p>
-            <p>
+            <p className="text-lg text-gray-800 mt-4">
                 {" "}
                 Cras non lorem auctor, aliquet nulla eget, ultrices ipsum. Curabitur ut
                 sodales quam. Nulla maximus porta tellus, in maximus ligula vulputate
@@ -63,7 +63,7 @@ export default function About() {
                 dictum nisi nec leo sollicitudin, finibus venenatis dui ultricies.
                 Aenean quis bibendum elit.{" "}
             </p>
-            <p>
+            <p className="text-lg text-gray-800 mt-4">
                 as odio nibh, bibendum a consequat sed, convallis nec eros. Praesent ex
                 nibh, blandit malesuada massa vel, ultricies pulvinar orci. Vestibulum
                 mi nibh, posuere vitae viverra eu, porta varius orci. Curabitur cursus
