@@ -4,6 +4,7 @@ import Navbar from "./Navbar"
 import About from "./About"
 import { Routes, Route } from "react-router-dom"
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
+import Checkout from "./Checkout"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </div>

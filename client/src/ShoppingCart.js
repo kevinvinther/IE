@@ -1,6 +1,5 @@
 import { useShoppingCart } from "./context/ShoppingCartContext"
 import { CartItem } from "./CartItem.js"
-import { cart } from "./context/ShoppingCartContext.js"
 import storeItems from "./data/database.json"
 
 export default function ShoppingCart({ isOpen }) {
@@ -33,9 +32,12 @@ export default function ShoppingCart({ isOpen }) {
                         }, 0)}
                         dkk
                     </div>
-                    <button className="text-white rounded shadow p-3 bg-blue-500 mt-10">
+                    <a
+                        href="./checkout"
+                        className="text-white rounded shadow p-3 bg-blue-500 mt-10"
+                    >
                         Goto checkout
-                    </button>
+                    </a>
                     <br />
                 </div>
             </div>
