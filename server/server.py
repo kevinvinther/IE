@@ -22,7 +22,8 @@ def handler(event, context):
         return response(str(e), 500)
 
 def getItems():
-    return None
+    itemList = loadItems()
+    return itemList
 
 def response(err, status = 400, msg = None):
     return {
