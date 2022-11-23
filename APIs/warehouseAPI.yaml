@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: API for IE warehouse
+  description: A general comunicationchannel to the warehouse for IE
+  version: 1.0.0
+servers:
+  - url: https://www.IEWarehouse.com/v1"
+    description: Base URL for all the calls
+paths:
+  /getAllItems:
+    get:
+      summary: Returns a list of all items in stock.
+      description: Returns a json object with all the diftent items, their picture and stock count
+      responses:
+        '200':    # status code
+          description: A JSON list of all items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /getStock/{itemId}:
+    get:
+      summary: Returns the stock count of a single item
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: ID of the item in question
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '404':
+          description: No such item exists
+  /sendOrder:
+    post:
+      summary: Sends order details to the warehouse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order:
+                  type: array
+                  items: 
+                    type: object
+                    properties:
+                      itemID:
+                        type: integer
+                      count:
+                        type: integer
+                addressDetails:
+                  type: object
+                  properties:
+                    address: 
+                      type: string
+                    city:
+                      type: string
+                    country:
+                      type: string
+                    ZIP:
+                      type: integer
+                customer:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    phone: 
+                      type: string
+                    email:
+                      type: string
+                note:
+                  type: string
+              
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Not accepted
+          
+  /reduceStock/{itemId}:
+    post:
+      summary: Returns the stock count of a single item
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: ID of the item in question
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '409':
+          description: Item can not be recued by the given amount
+        '404':
+          description: No such item exists
+
+
+

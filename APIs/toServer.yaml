@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: to IE server
+servers:
+  - description: Communication to the server
+    url: https://IEserver.com
+paths:
+  /sendOrder:
+    post:
+      summary: Creates an order in IEs server
+      requestBody:
+        content:
+          application/json: 
+            schema:   
+              type: object
+              properties:
+                orderId:
+                  type: integer
+                  example: 123
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      itemId:
+                        type: integer
+                        example: 2
+                      itemPrice:
+                        type: number
+                        example: 29.99
+                      count:
+                        type: integer
+                        example: 2
+                addressDetails:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                      example: "Streetname 123"
+                    city:
+                      type: string
+                      example: "Odense"
+                    country:
+                      type: string
+                      example: "DK"
+                    ZIP:
+                      type: integer
+                      example: "5000"
+                person:
+                  type: object
+                  properties:
+                    name: 
+                      type: string
+                      example: "Firstname Lastname"
+                    phone:
+                      type: string
+                      example: "12 34 56 78"
+                    email:
+                      type: string
+                      example: "example@email.com"
+                note:
+                  type: string
+                  example: "Hide the item under my doormat if I am not home"
+                coupon:
+                  type: object
+                  properties:
+                    ID: 
+                      type: integer
+                      example: 3
+                    name:
+                      type: string
+                      example: "two for one"
+                    description:
+                      type: string
+                      example: "Buy two post (ID: 2) and get one for free"
+                    freeShipping:
+                      type: boolean
+                      example: false
+                    reduction:
+                      type: number
+                      example: 29.99
+      responses:
+        '201':
+          description: Deal created
+        '400':
+          description: Not accepted
+  /item:
+    get:
+      summary: Returns a list of all the items
+      responses:
+        '200':
+          description: A list of all the items
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    itemId:
+                      type: integer
+                      example: 2
+                    itemPrice: 
+                      type: number
+                      example: 29.99
+                    stockCount:
+                      type: integer
+                      example: 7
+                    name:
+                      type: string
+                      example: "Pan"
+                    description:
+                      type: string
+                      example: "A pan for cooking food"
+                    image:
+                      type: string
+                      format: binary
+  /item/{itemId}:
+    get:
+      summary: Returns a list of all the items
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: ID of the item in question
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+            example: 2
+      responses:
+        '200':
+          description: A list of all the items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  itemId:
+                    type: integer
+                    example: 2
+                  itemPrice: 
+                    type: number
+                    example: 29.99
+                  stockCount:
+                    type: integer
+                    example: 7
+                  name:
+                    type: string
+                    example: "Pan"
+                  description:
+                    type: string
+                    example: "A pan for cooking food"
+                  image:
+                    type: string
+                    format: binary
+        '404':
+          description: Item not found

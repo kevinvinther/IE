@@ -1,5 +1,31 @@
 import orders
 import warehouse
+import json
+
+def handler(event, context):
+    try:
+        message = None
+        req = 2
+        if event["body"]:
+            message = event["body"]
+            req = 1
+
+        if req == 1: #Posting of order
+            order = Order(message)
+            return response(None, 201)
+        else: #Get items
+            return response(None, 200, getItems())
+
+        def getItems():
+            return None
+    except Exception as e: #If anything unknown goes wrong
+        return response(str(e), 500)
+
+def response(err, status = 400, msg = None):
+    return {
+            "statusCode": status,
+            "body": err if err else json.dumps(msg)
+            }
 
 #If the script is invoked directly by the user 
 if __name__ == "__main__":

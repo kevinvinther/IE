@@ -1,0 +1,63 @@
+openapi: 3.0.0
+servers:
+    url: https://A.com/
+info:
+  version: "1.0.0"
+  title: API for A
+  description: The API for comunicating with A
+paths:
+  /orderItem:
+    post:
+      summary: Places an order for new items at A
+      requestBody:
+        content:
+          application/json:
+            schema:      # Request body contents
+              type: object
+              properties:
+                order:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      ID:
+                        type: integer
+                      ammount: 
+                        type: integer
+                  example: [
+                    { ID: 4, ammount: 2 },
+                    { ID: 123, ammount: 5},
+                    { ID: 2, ammount: 1}
+                    ]
+                addressDetails:
+                  type: object
+                  properties:
+                    address: 
+                      type: string
+                      example: "Varehusgade 4"
+                    city: 
+                      type: string
+                      example: "Odense"
+                    country:
+                      type: string
+                      example: "DK"
+                    ZIP: 
+                      type: integer
+                      example: 5000
+                details:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: "Firstname Lastname"
+                    phone: 
+                      type: string
+                      example: "12 34 56 78"
+                    email:
+                      type: string
+                      example: "example@gmail.com"
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
