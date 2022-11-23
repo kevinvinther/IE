@@ -60,7 +60,7 @@ export default function Navbar() {
                             </li>
                         </ul>
                     </div>
-                    <button href="#">
+                    <button onClick={openCart}>
                         <span className="material-symbols-outlined relative">
                             shopping_basket
                         </span>
