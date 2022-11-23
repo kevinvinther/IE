@@ -1,17 +1,39 @@
 import json
 
+def loadOrders():
+    f = open("data.json")
+    data = json.load(f)
+    for o in data:
+        Order(o)
+    f.close()
+
+def writeOrders():
+    with open("data.json", "w") as out:
+        data = [odr.data for odr in Order.allOrders]
+        json.dump(data, out)
+
+def getAllOrders():
+    return Order.allOrders
+
+def getOrderById(orderId):
+    for odr in Order.allOrders:
+        if odr.id == orderId:
+            return odr
+    return None
+        
+
 class Order(object):
 
     allOrders = []
 
     def __init__(self, data):
-        self.data = data
         self.open = True
         message = None
         if isinstance(data, str):
             message = json.loads(data)
         else:
             message = data
+        self.data = data 
         
         self.id = message["orderId"]
         self.items = message["items"]
@@ -20,11 +42,7 @@ class Order(object):
         self.note = message["note"]
         self.coupon = message["coupon"]
 
-
-        allOrders.add(self)
-
-    def getAllOrders():
-        return allOrders
+        Order.allOrders.append(self)
 
     def getAllOpenOrders():
         openOrders = []
@@ -33,14 +51,14 @@ class Order(object):
                 openOrders.add(order)
         return openOrders
 
-    def export():
+    def export(self):
         return self.data
 
-    def setState(newState):
+    def setState(self, newState):
         oldState = self.open
         self.open = newState
-        return oldState = newState
+        return oldState == newState
 
-    def cancle():
-        allOrders.remove(self)
+    def cancle(self):
+        Order.allOrders.remove(self)
         
