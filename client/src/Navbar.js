@@ -2,8 +2,10 @@ import React from "react"
 import "./index.css"
 import logo from "./assets/logo.png"
 import { NavLink } from "react-router-dom"
+import { useShoppingCart } from "./context/ShoppingCartContext"
 
 export default function Navbar() {
+    const { openCart, cartQuantity } = useShoppingCart()
     return (
         <div>
             <link
@@ -63,7 +65,7 @@ export default function Navbar() {
                             shopping_basket
                         </span>
                         <div className="rounded-full bg-red-500 p-1 text-white text-xs flex justify-center align-middle w-6 h-6 absolute translate-x-[35%] translate-y-[-55%]">
-                            3
+                            {cartQuantity}
                         </div>
                     </button>
                 </div>
