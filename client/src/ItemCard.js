@@ -1,7 +1,10 @@
 import React from "react"
+import { useShoppingCart } from "./context/ShoppingCartContext"
 
-export default function ItemCard({ image, price, name }) {
-    let quantity = 1
+export default function ItemCard({ image, price, name, sku }) {
+    const { getItemQuantity, incrementItemQuantity, decrementItemQuantity } =
+        useShoppingCart()
+    let quantity = getItemQuantity(sku)
     return (
         <div className="block p-6 max-w-sm min-w-[300px] max-h-900 min-h-[250px] bg-white rounded-lg border border-gray-200 shadow-md hober:bg-gray-100 ">
             <img src={image} alt={name} className="object-contain h-80 w-90" />
@@ -11,7 +14,10 @@ export default function ItemCard({ image, price, name }) {
                 </h5>
                 <div class="h-10 w-32 justify-self-end">
                     <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
-                        <button class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                        <button
+                            class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
+                            onClick={() => decrementItemQuantity(sku)}
+                        >
                             <span class="m-auto text-2xl font-thin">−</span>
                         </button>
                         <span
@@ -20,7 +26,10 @@ export default function ItemCard({ image, price, name }) {
                         >
                             {quantity}
                         </span>
-                        <button class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                        <button
+                            class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
+                            onClick={() => incrementItemQuantity(sku)}
+                        >
                             <span class="m-auto text-2xl font-thin">+</span>
                         </button>
                     </div>
