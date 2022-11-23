@@ -1,23 +1,23 @@
-import "./App.css"
-// import Front from "./Front"
+import "./index.css"
+import Home from "./Home"
 import Navbar from "./Navbar"
-import ItemCard from "./ItemCard"
-// import About from "./About"
+import About from "./About"
+import { Routes, Route } from "react-router-dom"
+import { ShoppingCartProvider } from "./context/ShoppingCartContext"
+import Checkout from "./Checkout"
 
 function App() {
-  const database = JSON.parse(
-    JSON.stringify(require("./data/database.json"))
-  ).products
-  const cards = database.map((product) => (
-    <ItemCard image={product.image} name={product.name} price={product.price} />
-  ))
   return (
-    <div>
-      <Navbar />
-      <div className="max-w-10 mx-20 my-10 grid gap-x-10 gap-y-20 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-        {cards}
+    <ShoppingCartProvider>
+      <div className="bg-gray-50">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
       </div>
-    </div>
+    </ShoppingCartProvider>
   )
 }
 

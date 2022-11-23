@@ -1,15 +1,18 @@
 import React from "react"
 import "./index.css"
 import logo from "./assets/logo.png"
+import { NavLink } from "react-router-dom"
+import { useShoppingCart } from "./context/ShoppingCartContext"
 
 export default function Navbar() {
+    const { openCart, cartQuantity } = useShoppingCart()
     return (
         <div>
             <link
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
             />
-            <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+            <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 shadow-sm">
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
                     <a href="#" className="flex items-center">
                         <img src={logo} className="mr-3 h-6 sm:h-9" alt="IE Logo"></img>
@@ -40,27 +43,31 @@ export default function Navbar() {
                     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                         <ul class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
-                                <a
-                                    href="#"
+                                <NavLink
                                     class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                                    aria-current="page"
+                                    to="/"
                                 >
                                     Store
-                                </a>
+                                </NavLink>
                             </li>
                             <li>
-                                <a
-                                    href="#"
+                                <NavLink
                                     class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                                    to="/about"
                                 >
                                     About
-                                </a>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">shopping_basket</span>
-                    </a>
+                    <button onClick={openCart}>
+                        <span className="material-symbols-outlined relative">
+                            shopping_basket
+                        </span>
+                        <div className="rounded-full bg-red-500 p-1 text-white text-xs flex justify-center align-middle w-6 h-6 absolute translate-x-[35%] translate-y-[-55%]">
+                            {cartQuantity}
+                        </div>
+                    </button>
                 </div>
             </nav>
         </div>
