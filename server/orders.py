@@ -11,6 +11,7 @@ def writeOrders():
     with open("data.json", "w") as out:
         data = [odr.data for odr in Order.allOrders]
         json.dump(data, out)
+    Order.allOrders = []
 
 def getAllOrders():
     return Order.allOrders
@@ -28,27 +29,22 @@ class Order(object):
 
     def __init__(self, data):
         self.open = True
-        message = None
-        if isinstance(data, str):
-            message = json.loads(data)
-        else:
-            message = data
         self.data = data 
         
-        self.id = message["orderId"]
-        self.items = message["items"]
-        self.custAddress = message["addressDetails"]
-        self.cust = message["person"]
-        self.note = message["note"]
-        self.coupon = message["coupon"]
+        self.id = data["orderId"]
+        self.items = data["items"]
+        self.custAddress = data["addressDetails"]
+        self.cust = data["person"]
+        self.note = data["note"]
+        self.coupon = data["coupon"]
 
         Order.allOrders.append(self)
 
-    def getAllOpenOrders():
+    def getAllOpenOrders(self):
         openOrders = []
-        for order in allOrders:
+        for order in Order.allOrders:
             if order.open:
-                openOrders.add(order)
+                openOrders.append(order)
         return openOrders
 
     def export(self):

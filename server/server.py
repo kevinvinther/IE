@@ -12,7 +12,7 @@ def handler(event, context):
             req = 1
 
         if req == 1: #Posting of order
-            order = Order(message)
+            order = orders.Order(message)
             return response(None, 201)
         else: #Get items
             return response(None, 200, getItems())
@@ -24,6 +24,11 @@ def handler(event, context):
 def getItems():
     itemList = loadItems()
     return itemList
+
+def itemById(itemId):
+    itemList = loadItems()
+    item = getItemFromId(itemId, itemList)
+    return item
 
 def response(err, status = 400, msg = None):
     return {
