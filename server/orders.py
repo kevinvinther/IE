@@ -1,46 +1,69 @@
 import json
 
+# Cyclomatic complexity = 2 
+def loadOrders():
+    f = open("data.json")
+    data = json.load(f)
+    for o in data:
+        Order(o)
+    f.close()
+
+# Cyclomatic complexity = 2
+def writeOrders():
+    with open("data.json", "w") as out:
+        data = [odr.data for odr in Order.allOrders]
+        json.dump(data, out)
+    Order.allOrders = []
+
+# Cyclomatic complexity = 1
+def getAllOrders():
+    return Order.allOrders
+
+# Cyclomatic complexity = 3
+def getOrderById(orderId):
+    for odr in Order.allOrders:
+        if odr.id == orderId:
+            return odr
+    return None
+
+
 class Order(object):
 
     allOrders = []
 
+    # Cyclomatic complexity = 1
     def __init__(self, data):
-        self.data = data
         self.open = True
-        message = None
-        if isinstance(data, str):
-            message = json.loads(data)
-        else:
-            message = data
+        self.data = data 
         
-        self.id = message["orderId"]
-        self.items = message["items"]
-        self.custAddress = message["addressDetails"]
-        self.cust = message["person"]
-        self.note = message["note"]
-        self.coupon = message["coupon"]
+        self.id = data["orderId"]
+        self.items = data["items"]
+        self.custAddress = data["addressDetails"]
+        self.cust = data["person"]
+        self.note = data["note"]
+        self.coupon = data["coupon"]
 
+        Order.allOrders.append(self)
 
-        allOrders.add(self)
-
-    def getAllOrders():
-        return allOrders
-
-    def getAllOpenOrders():
+    # Cyclomatic complexity = 3
+    def getAllOpenOrders(self):
         openOrders = []
-        for order in allOrders:
+        for order in Order.allOrders:
             if order.open:
-                openOrders.add(order)
+                openOrders.append(order)
         return openOrders
 
-    def export():
+    # Cyclomatic complexity = 1
+    def export(self):
         return self.data
 
-    def setState(newState):
+    # Cyclomatic complexity = 1
+    def setState(self, newState):
         oldState = self.open
         self.open = newState
-        return oldState = newState
+        return oldState == newState
 
-    def cancle():
-        allOrders.remove(self)
+    # Cyclomatic complexity = 1
+    def cancle(self):
+        Order.allOrders.remove(self)
         
