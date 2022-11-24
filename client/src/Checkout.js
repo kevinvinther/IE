@@ -2,6 +2,7 @@ import { CartItem } from "./CartItem.js"
 import storeItems from "./data/database.json"
 import { useShoppingCart } from "./context/ShoppingCartContext"
 import SendOrder from "./SendOrder.js"
+import { Formik } from "formik"
 
 export default function Checkout() {
     const { closeCart, cart } = useShoppingCart()
@@ -26,165 +27,171 @@ export default function Checkout() {
                     </div>
                 </div>
             </div>
-            <form className="grid justify-center mt-10 columns-1">
-                {
-                    //" This code is from https://flowbite.com/docs/forms/floating-label/ and https://flowbite.com/docs/forms/radio/"
-                }
-                <div className="relative">
-                    <input
-                        type="text"
-                        placeholder="John Smith"
-                        id="floating-input"
-                        className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    />
-                    <label
-                        for="floating-outlined"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                        Full Name
-                    </label>
-                </div>
-                <div className="relative">
-                    <input
-                        type="number"
-                        placeholder="82731064"
-                        id="floating-input"
-                        className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    />
-                    <label
-                        for="floating-outlined"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                        Phone Number
-                    </label>
-                </div>
-                <div className="relative">
-                    <input
-                        type="email"
-                        placeholder="john@smith.co.uk"
-                        id="floating-input"
-                        className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    />
-                    <label
-                        for="floating-outlined"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                        E-mail
-                    </label>
-                </div>
-                <div className="relative">
-                    <input
-                        type="text"
-                        id="floating-input"
-                        placeholder="Campusvej 55"
-                        className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    />
-                    <label
-                        for="floating-outlined"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                        Address
-                    </label>
-                </div>
-                <div className="relative">
-                    <input
-                        type="text"
-                        id="floating-input"
-                        placeholder="Odense"
-                        className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    />
-                    <label
-                        for="floating-outlined"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                        City
-                    </label>
-                </div>
-                <div className="relative">
-                    <input
-                        type="text"
-                        id="floating-input"
-                        placeholder="5220"
-                        className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    />
-                    <label
-                        for="floating-outlined"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                        Zip Code
-                    </label>
-                </div>
-                <div className="relative">
-                    <input
-                        type="text"
-                        id="floating-input"
-                        placeholder="DK"
-                        className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    />
-                    <label
-                        for="floating-outlined"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                        Country Code
-                    </label>
-                </div>
-                <div className="relative">
-                    <input
-                        type="text"
-                        id="floating-input"
-                        placeholder=""
-                        className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    />
-                    <label
-                        for="floating-outlined"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                        Note
-                    </label>
-                </div>
-                <div className="relative">
-                    <label>Payment</label>
-                    <div class="flex items-center mb-4">
-                        <input
-                            id="default-radio-1"
-                            type="radio"
-                            value=""
-                            name="default-radio"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                        />
-                        <label
-                            for="default-radio-1"
-                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                            Paypal
-                        </label>
-                    </div>
-                    <div class="flex items-center">
-                        <input
-                            checked
-                            id="default-radio-2"
-                            type="radio"
-                            value=""
-                            name="default-radio"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                        />
-                        <label
-                            for="default-radio-2"
-                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                            Credit Card
-                        </label>
-                    </div>
-                </div>
-            </form>
-            <div className="flex justify-center">
-                <a
-                    onClick={SendOrder}
-                    href="/"
-                    className="text-white rounded shadow p-3 bg-blue-500 mt-10"
+            <div className="grid justify-center mt-10 columns-1">
+                <Formik
+                    initialValues={{
+                        email: "",
+                        fullname: "",
+                        phone: "",
+                        address: "",
+                        city: "",
+                        country: "",
+                        zip: "",
+                        note: "",
+                        readTOS: false,
+                    }}
+                    validate={(values) => {
+                        const errors = {}
+                        if (!values.email) {
+                            errors.email = "Required"
+                        } else if (
+                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+                        ) {
+                            errors.email = "Invalid email address"
+                        }
+                        if (!values.fullname) {
+                            errors.fullname = "Required"
+                        }
+                        if (!values.phone) {
+                            errors.phone = "Required"
+                        }
+                        if (!values.address) {
+                            errors.address = "Required"
+                        }
+                        if (!values.city) {
+                            errors.city = "Required"
+                        }
+                        if (!values.country) {
+                            errors.country = "Required"
+                        }
+                        if (!values.zip) {
+                            errors.zip = "Required"
+                        }
+                        if (!values.readTOS) {
+                            errors.readTOS = "Required"
+                        }
+                        return errors
+                    }}
+                    onSubmit={(values, { setSubmitting }) => {
+                        setTimeout(() => {
+                            SendOrder(values)
+                            setSubmitting(false)
+                        }, 400)
+                    }}
                 >
-                    Submit Order
-                </a>
+                    {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                    }) => (
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                type="email"
+                                name="email"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.email}
+                                placeholder="E-Mail"
+                                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            />{" "}
+                            {errors.email && touched.email && errors.email}
+                            <input
+                                type="text"
+                                name="fullname"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.fullname}
+                                placeholder="Full Name"
+                                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            />
+                            {errors.fullname && touched.fullname && errors.fullname}
+                            <input
+                                type="text"
+                                name="phone"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.phone}
+                                placeholder="Phone Number"
+                                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            />
+                            {errors.phone && touched.phone && errors.phone}
+                            <input
+                                type="text"
+                                name="address"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.address}
+                                placeholder="Address"
+                                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            />
+                            {errors.address && touched.address && errors.address}
+                            <input
+                                type="text"
+                                name="city"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.city}
+                                placeholder="City"
+                                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            />
+                            {errors.city && touched.city && errors.city}
+                            <input
+                                type="text"
+                                name="country"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.country}
+                                placeholder="Country"
+                                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            />
+                            {errors.country && touched.country && errors.country}
+                            <input
+                                type="text"
+                                name="zip"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.zip}
+                                placeholder="Zip Code"
+                                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            />
+                            {errors.zip && touched.zip && errors.zip}
+                            <input
+                                type="text"
+                                name="note"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.note}
+                                placeholder="Note"
+                                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            />
+                            {errors.note && touched.note && errors.note}
+                            <input
+                                type="checkbox"
+                                name="readTOS"
+                                id="readTOS"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.readTOS}
+                            />
+                            <label for="readTOS">
+                                I have read and accepted the terms and conditions
+                            </label>
+                            <br />
+                            {errors.readTOS && touched.readTOS && errors.readTOS}
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="text-white rounded shadow p-3 bg-blue-500 mt-10"
+                            >
+                                Submit
+                            </button>
+                        </form>
+                    )}
+                </Formik>
             </div>
         </div>
     )
